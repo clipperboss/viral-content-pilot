@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Content Pilot - Discover Trending Content</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #9333ea 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Lucide Icons as SVG components
+        const TrendingUpIcon = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+        );
+
+        const SearchIcon = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        );
+
+        const StarIcon = ({ filled = false }) => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+        );
+
+        const EyeIcon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        );
+
+        const HeartIcon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+        );
+
+        const Share2Icon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+        );
+
+        const SparklesIcon = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                <path d="M5 3v4"></path>
+                <path d="M19 17v4"></path>
+                <path d="M3 5h4"></path>
+                <path d="M17 19h4"></path>
+            </svg>
+        );
+
+        const ZapIcon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+        );
+
+        const BarChart3Icon = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v18h18"></path>
+                <path d="M18 17V9"></path>
+                <path d="M13 17V5"></path>
+                <path d="M8 17v-3"></path>
+            </svg>
+        );
+
+        const CopyIcon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        );
+
+        const MailIcon = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+        );
+
+        const ChevronRightIcon = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        );
+
+        function ViralContentPilot() {
+            const [activeTab, setActiveTab] = useState('discover');
+            const [searchQuery, setSearchQuery] = useState('');
+            const [selectedPlatform, setSelectedPlatform] = useState('all');
+            const [selectedCategory, setSelectedCategory] = useState('all');
+            const [emailCaptured, setEmailCaptured] = useState(false);
+            const [showEmailModal, setShowEmailModal] = useState(false);
+            const [email, setEmail] = useState('');
+            const [savedContent, setSavedContent] = useState([]);
+            const [showCopied, setShowCopied] = useState(false);
+
+            // Check localStorage for saved email
+            useEffect(() => {
+                const savedEmail = localStorage.getItem('userEmail');
+                if (savedEmail) {
+                    setEmailCaptured(true);
+                    setEmail(savedEmail);
+                }
+
+                const saved = localStorage.getItem('savedContent');
+                if (saved) {
+                    setSavedContent(JSON.parse(saved));
+                }
+            }, []);
+
+            const trendingContent = [
+                {
+                    id: 1,
+                    title: "5 Marketing Secrets That Generated $2M in Revenue",
+                    platform: "LinkedIn",
+                    author: "Sarah Martinez",
+                    views: "2.4M",
+                    engagement: "94K",
+                    likes: "12K",
+                    shares: "8.5K",
+                    comments: "1.2K",
+                    contentType: "video",
+                    category: "marketing",
+                    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
+                    description: "Deep dive into proven marketing strategies that scaled our agency from zero to 7 figures",
+                    viralScore: 98,
+                    trending: true
+                },
+                {
+                    id: 2,
+                    title: "The AI Tool That's Replacing Entire Marketing Teams",
+                    platform: "Twitter",
+                    author: "Tech Insider",
+                    views: "1.8M",
+                    engagement: "76K",
+                    likes: "45K",
+                    shares: "15K",
+                    comments: "2.8K",
+                    contentType: "article",
+                    category: "technology",
+                    thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80",
+                    description: "How AI is revolutionizing content creation and what it means for marketers",
+                    viralScore: 95,
+                    trending: true
+                },
+                {
+                    id: 3,
+                    title: "I Spent $0 on Ads and Got 100K Followers in 30 Days",
+                    platform: "Instagram",
+                    author: "Growth Hacker Pro",
+                    views: "3.2M",
+                    engagement: "128K",
+                    likes: "89K",
+                    shares: "12K",
+                    comments: "4.5K",
+                    contentType: "video",
+                    category: "growth",
+                    thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80",
+                    description: "Organic growth strategies that actually work in 2025",
+                    viralScore: 99,
+                    trending: true
+                },
+                {
+                    id: 4,
+                    title: "Why Your Content Isn't Going Viral (And How to Fix It)",
+                    platform: "YouTube",
+                    author: "Content King",
+                    views: "890K",
+                    engagement: "45K",
+                    likes: "32K",
+                    shares: "5.2K",
+                    comments: "1.8K",
+                    contentType: "video",
+                    category: "content",
+                    thumbnail: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&q=80",
+                    description: "The psychology behind viral content and step-by-step framework",
+                    viralScore: 92,
+                    trending: false
+                },
+                {
+                    id: 5,
+                    title: "Email Marketing is DEAD... Here's What Replaced It",
+                    platform: "LinkedIn",
+                    author: "Marketing Maven",
+                    views: "1.5M",
+                    engagement: "67K",
+                    likes: "28K",
+                    shares: "9.8K",
+                    comments: "3.1K",
+                    contentType: "article",
+                    category: "email",
+                    thumbnail: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&q=80",
+                    description: "The evolution of customer communication and new strategies for 2025",
+                    viralScore: 88,
+                    trending: false
+                },
+                {
+                    id: 6,
+                    title: "I Made $50K Last Month Selling Digital Products",
+                    platform: "Twitter",
+                    author: "Digital Creator",
+                    views: "2.1M",
+                    engagement: "95K",
+                    likes: "52K",
+                    shares: "18K",
+                    comments: "5.4K",
+                    contentType: "thread",
+                    category: "business",
+                    thumbnail: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80",
+                    description: "Complete breakdown of my digital product empire and how you can replicate it",
+                    viralScore: 96,
+                    trending: true
+                },
+                {
+                    id: 7,
+                    title: "The Content Strategy That Built My 500K Following",
+                    platform: "Instagram",
+                    author: "Social Media Pro",
+                    views: "1.2M",
+                    engagement: "58K",
+                    likes: "38K",
+                    shares: "7.2K",
+                    comments: "2.4K",
+                    contentType: "video",
+                    category: "growth",
+                    thumbnail: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=400&q=80",
+                    description: "My exact posting schedule and content framework revealed",
+                    viralScore: 91,
+                    trending: true
+                },
+                {
+                    id: 8,
+                    title: "Stop Creating Content - Do This Instead",
+                    platform: "YouTube",
+                    author: "Creator Economy",
+                    views: "2.7M",
+                    engagement: "112K",
+                    likes: "87K",
+                    shares: "14K",
+                    comments: "3.9K",
+                    contentType: "video",
+                    category: "content",
+                    thumbnail: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&q=80",
+                    description: "Why less is more and how to maximize your content ROI",
+                    viralScore: 94,
+                    trending: true
+                }
+            ];
+
+            const contentIdeas = [
+                {
+                    title: "Behind the Scenes Content",
+                    description: "Show your process, failures, and wins",
+                    viralPotential: 85,
+                    platforms: ["Instagram", "TikTok", "LinkedIn"]
+                },
+                {
+                    title: "Contrarian Takes",
+                    description: "Challenge popular beliefs in your industry",
+                    viralPotential: 92,
+                    platforms: ["Twitter", "LinkedIn"]
+                },
+                {
+                    title: "Case Study Breakdowns",
+                    description: "Detailed analysis of successful campaigns",
+                    viralPotential: 88,
+                    platforms: ["LinkedIn", "YouTube"]
+                },
+                {
+                    title: "Quick Tips & Hacks",
+                    description: "Actionable advice in under 60 seconds",
+                    viralPotential: 90,
+                    platforms: ["Instagram", "TikTok", "Twitter"]
+                },
+                {
+                    title: "Transformation Stories",
+                    description: "Before/after results with proof",
+                    viralPotential: 94,
+                    platforms: ["All platforms"]
+                },
+                {
+                    title: "Myth Busting",
+                    description: "Debunk common misconceptions",
+                    viralPotential: 87,
+                    platforms: ["YouTube", "LinkedIn", "Twitter"]
+                }
+            ];
+
+            const handleSaveContent = (content) => {
+                if (!emailCaptured) {
+                    setShowEmailModal(true);
+                    return;
+                }
+                
+                const alreadySaved = savedContent.find(item => item.id === content.id);
+                if (!alreadySaved) {
+                    const newSaved = [...savedContent, content];
+                    setSavedContent(newSaved);
+                    localStorage.setItem('savedContent', JSON.stringify(newSaved));
+                }
+            };
+
+            const handleEmailSubmit = (e) => {
+                e.preventDefault();
+                if (email && email.includes('@')) {
+                    setEmailCaptured(true);
+                    setShowEmailModal(false);
+                    localStorage.setItem('userEmail', email);
+                    
+                    // Here you would send to your backend/email service
+                    console.log('Email captured:', email);
+                    
+                    // Optional: Send to a service like Mailchimp, ConvertKit, etc.
+                    // fetch('YOUR_API_ENDPOINT', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify({ email })
+                    // });
+                }
+            };
+
+            const handleCopyTitle = (title) => {
+                navigator.clipboard.writeText(title);
+                setShowCopied(true);
+                setTimeout(() => setShowCopied(false), 2000);
+            };
+
+            const filteredContent = trendingContent.filter(item => {
+                const matchesPlatform = selectedPlatform === 'all' || item.platform === selectedPlatform;
+                const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+                const matchesSearch = !searchQuery || 
+                    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesPlatform && matchesCategory && matchesSearch;
+            });
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
+                    {/* Copied Notification */}
+                    {showCopied && (
+                        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 slide-in">
+                            ✓ Copied to clipboard!
+                        </div>
+                    )}
+
+                    {/* Email Capture Modal */}
+                    {showEmailModal && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative slide-in">
+                                <button 
+                                    onClick={() => setShowEmailModal(false)}
+                                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
+                                >
+                                    ×
+                                </button>
+                                <div className="text-center mb-6">
+                                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <SparklesIcon />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                        Unlock Premium Features
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        Save unlimited content, export reports, and get daily viral trend alerts
+                                    </p>
+                                </div>
+                                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                                            Email Address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="you@example.com"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                                            required
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all"
+                                    >
+                                        Get Free Access
+                                    </button>
+                                    <p className="text-xs text-gray-500 text-center">
+                                        No credit card required. Unsubscribe anytime.
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Header */}
+                    <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex items-center justify-between py-4">
+                                <div className="flex items-center space-x-3">
+                                    <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                                        <TrendingUpIcon />
+                                    </div>
+                                    <div>
+                                        <h1 className="text-2xl font-bold text-gray-900">Viral Content Pilot</h1>
+                                        <p className="text-sm text-gray-500">Discover • Analyze • Create</p>
+                                    </div>
+                                </div>
+                                {emailCaptured ? (
+                                    <div className="flex items-center space-x-2 bg-green-50 px-4 py-2 rounded-lg">
+                                        <StarIcon filled={true} />
+                                        <span className="text-sm font-medium text-green-700">Premium Active</span>
+                                    </div>
+                                ) : (
+                                    <button 
+                                        onClick={() => setShowEmailModal(true)}
+                                        className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all flex items-center space-x-2"
+                                    >
+                                        <ZapIcon />
+                                        <span>Upgrade Free</span>
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Navigation Tabs */}
+                    <div className="bg-white border-b border-gray-200">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex space-x-8 overflow-x-auto">
+                                <button
+                                    onClick={() => setActiveTab('discover')}
+                                    className={`flex items-center space-x-2 py-4 border-b-2 transition-all whitespace-nowrap ${
+                                        activeTab === 'discover'
+                                            ? 'border-purple-600 text-purple-600'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                                    }`}
+                                >
+                                    <TrendingUpIcon />
+                                    <span className="font-medium">Discover Trends</span>
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('ideas')}
+                                    className={`flex items-center space-x-2 py-4 border-b-2 transition-all whitespace-nowrap ${
+                                        activeTab === 'ideas'
+                                            ? 'border-purple-600 text-purple-600'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                                    }`}
+                                >
+                                    <SparklesIcon />
+                                    <span className="font-medium">Content Ideas</span>
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('analytics')}
+                                    className={`flex items-center space-x-2 py-4 border-b-2 transition-all whitespace-nowrap ${
+                                        activeTab === 'analytics'
+                                            ? 'border-purple-600 text-purple-600'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                                    }`}
+                                >
+                                    <BarChart3Icon />
+                                    <span className="font-medium">Analytics</span>
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('saved')}
+                                    className={`flex items-center space-x-2 py-4 border-b-2 transition-all whitespace-nowrap ${
+                                        activeTab === 'saved'
+                                            ? 'border-purple-600 text-purple-600'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700'
+                                    }`}
+                                >
+                                    <StarIcon />
+                                    <span className="font-medium">Saved ({savedContent.length})</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        {activeTab === 'discover' && (
+                            <div>
+                                {/* Search and Filters */}
+                                <div className="mb-8 space-y-4">
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                        <div className="flex-1 relative">
+                                            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                                <SearchIcon />
+                                            </div>
+                                            <input
+                                                type="text"
+                                                placeholder="Search viral content..."
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                                            />
+                                        </div>
+                                        <select
+                                            value={selectedPlatform}
+                                            onChange={(e) => setSelectedPlatform(e.target.value)}
+                                            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                                        >
+                                            <option value="all">All Platforms</option>
+                                            <option value="LinkedIn">LinkedIn</option>
+                                            <option value="Twitter">Twitter</option>
+                                            <option value="Instagram">Instagram</option>
+                                            <option value="YouTube">YouTube</option>
+                                        </select>
+                                        <select
+                                            value={selectedCategory}
+                                            onChange={(e) => setSelectedCategory(e.target.value)}
+                                            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                                        >
+                                            <option value="all">All Categories</option>
+                                            <option value="marketing">Marketing</option>
+                                            <option value="technology">Technology</option>
+                                            <option value="growth">Growth</option>
+                                            <option value="content">Content</option>
+                                            <option value="business">Business</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* Trending Content Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {filteredContent.map((content) => (
+                                        <div key={content.id} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-200 overflow-hidden group">
+                                            <div className="relative">
+                                                <img
+                                                    src={content.thumbnail}
+                                                    alt={content.title}
+                                                    className="w-full h-48 object-cover"
+                                                />
+                                                {content.trending && (
+                                                    <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center space-x-1">
+                                                        <ZapIcon />
+                                                        <span>TRENDING</span>
+                                                    </div>
+                                                )}
+                                                <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-full text-xs font-bold text-purple-600">
+                                                    {content.viralScore}% Viral Score
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="p-5">
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <div className="flex items-center space-x-2">
+                                                        <div className="bg-gray-100 px-3 py-1 rounded-lg">
+                                                            <span className="text-xs font-medium text-gray-700">{content.platform}</span>
+                                                        </div>
+                                                        <div className="bg-gray-100 px-3 py-1 rounded-lg">
+                                                            <span className="text-xs font-medium text-gray-700 capitalize">{content.contentType}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                                                    {content.title}
+                                                </h3>
+                                                <p className="text-sm text-gray-600 mb-4">{content.description}</p>
+
+                                                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                                    <div className="flex items-center space-x-4">
+                                                        <div className="flex items-center space-x-1">
+                                                            <EyeIcon />
+                                                            <span>{content.views}</span>
+                                                        </div>
+                                                        <div className="flex items-center space-x-1">
+                                                            <HeartIcon />
+                                                            <span>{content.likes}</span>
+                                                        </div>
+                                                        <div className="flex items-center space-x-1">
+                                                            <Share2Icon />
+                                                            <span>{content.shares}</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                                                        {content.engagement} engaged
+                                                    </span>
+                                                </div>
+
+                                                <div className="flex items-center space-x-2">
+                                                    <button
+                                                        onClick={() => handleSaveContent(content)}
+                                                        className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all flex items-center justify-center space-x-2"
+                                                    >
+                                                        <StarIcon />
+                                                        <span>Save</span>
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => handleCopyTitle(content.title)}
+                                                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
+                                                    >
+                                                        <CopyIcon />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'ideas' && (
+                            <div>
+                                <div className="mb-8">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Content Ideas Generator</h2>
+                                    <p className="text-gray-600">Proven content formats that drive engagement and shares</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {contentIdeas.map((idea, index) => (
+                                        <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-200 p-6">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <SparklesIcon />
+                                                <div className="text-right">
+                                                    <div className="text-2xl font-bold text-purple-600">{idea.viralPotential}%</div>
+                                                    <div className="text-xs text-gray-500">Viral Potential</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <h3 className="text-xl font-bold text-gray-900 mb-2">{idea.title}</h3>
+                                            <p className="text-gray-600 mb-4">{idea.description}</p>
+
+                                            <div className="mb-4">
+                                                <div className="text-xs font-semibold text-gray-700 mb-2">Best Platforms:</div>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {idea.platforms.map((platform, i) => (
+                                                        <span key={i} className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">
+                                                            {platform}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            <button 
+                                                onClick={() => handleCopyTitle(idea.title)}
+                                                className="w-full bg-purple-600 text-white py-2 rounded-lg font-medium hover:bg-purple-700 transition-all flex items-center justify-center space-x-2"
+                                            >
+                                                <ChevronRightIcon />
+                                                <span>Use This Idea</span>
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'analytics' && (
+                            <div>
+                                <div className="mb-8">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Performance Analytics</h2>
+                                    <p className="text-gray-600">Track what's working across platforms</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                    <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white">
+                                        <EyeIcon />
+                                        <div className="text-3xl font-bold mb-1 mt-3">12.4M</div>
+                                        <div className="text-purple-100">Total Views Tracked</div>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white">
+                                        <TrendingUpIcon />
+                                        <div className="text-3xl font-bold mb-1 mt-3">487K</div>
+                                        <div className="text-blue-100">Total Engagement</div>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white">
+                                        <SparklesIcon />
+                                        <div className="text-3xl font-bold mb-1 mt-3">92%</div>
+                                        <div className="text-green-100">Avg Viral Score</div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-4">Platform Performance</h3>
+                                    <div className="space-y-4">
+                                        {[
+                                            { name: 'LinkedIn', score: 92 },
+                                            { name: 'Instagram', score: 88 },
+                                            { name: 'Twitter', score: 85 },
+                                            { name: 'YouTube', score: 79 }
+                                        ].map((platform) => (
+                                            <div key={platform.name}>
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="font-medium text-gray-700">{platform.name}</span>
+                                                    <span className="text-sm text-gray-500">{platform.score}% avg viral score</span>
+                                                </div>
+                                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                                    <div
+                                                        className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full transition-all duration-500"
+                                                        style={{ width: `${platform.score}%` }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'saved' && (
+                            <div>
+                                <div className="mb-8">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Saved Content</h2>
+                                    <p className="text-gray-600">Your curated collection of viral content</p>
+                                </div>
+
+                                {savedContent.length === 0 ? (
+                                    <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
+                                        <div className="flex justify-center mb-4">
+                                            <StarIcon />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2">No saved content yet</h3>
+                                        <p className="text-gray-600 mb-6">Start saving viral content to build your inspiration library</p>
+                                        <button
+                                            onClick={() => setActiveTab('discover')}
+                                            className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all inline-flex items-center space-x-2"
+                                        >
+                                            <TrendingUpIcon />
+                                            <span>Discover Trends</span>
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {savedContent.map((content) => (
+                                            <div key={content.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="bg-gray-100 px-3 py-1 rounded-lg">
+                                                        <span className="text-xs font-medium text-gray-700">{content.platform}</span>
+                                                    </div>
+                                                    <StarIcon filled={true} />
+                                                </div>
+                                                <h3 className="text-lg font-bold text-gray-900 mb-2">{content.title}</h3>
+                                                <p className="text-sm text-gray-600 mb-3">{content.description}</p>
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="text-gray-500">{content.views} views</span>
+                                                    <button 
+                                                        onClick={() => handleCopyTitle(content.title)}
+                                                        className="text-purple-600 hover:text-purple-700 font-medium"
+                                                    >
+                                                        Copy Title →
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Footer CTA */}
+                    {!emailCaptured && (
+                        <div className="bg-gradient-to-r from-purple-600 to-blue-600 py-12 mt-16">
+                            <div className="max-w-4xl mx-auto px-4 text-center">
+                                <h2 className="text-3xl font-bold text-white mb-4">
+                                    Ready to Create Viral Content?
+                                </h2>
+                                <p className="text-purple-100 mb-6 text-lg">
+                                    Get unlimited access to trending content, AI-powered insights, and daily viral alerts
+                                </p>
+                                <button
+                                    onClick={() => setShowEmailModal(true)}
+                                    className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all inline-flex items-center space-x-2"
+                                >
+                                    <MailIcon />
+                                    <span>Start Free Trial</span>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<ViralContentPilot />, document.getElementById('root'));
+    </script>
+</body>
+</html>
