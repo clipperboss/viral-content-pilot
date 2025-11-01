@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAIT! Special One-Time Offer - Advanced Funnel Mastery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .countdown-bar {
+            background: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .countdown-timer {
+            font-size: 32px;
+            margin-top: 10px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h2 {
+            font-size: 28px;
+            font-weight: normal;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .hero .special-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .content-section {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .content-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #667eea;
+        }
+        
+        .content-section h3 {
+            font-size: 28px;
+            margin: 40px 0 20px;
+            color: #333;
+        }
+        
+        .content-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .module-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .module-card h4 {
+            font-size: 22px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .module-card .value {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .module-card ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .module-card ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .module-card ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .bonus-section {
+            background: #fff9e6;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border: 3px dashed #ffd700;
+        }
+        
+        .bonus-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .bonus-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .bonus-item .bonus-value {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .price-comparison {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+        
+        .price-comparison .regular-price {
+            font-size: 24px;
+            text-decoration: line-through;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .price-comparison .sale-price {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .price-comparison .savings {
+            font-size: 28px;
+            background: #ff6b6b;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .guarantee-box {
+            background: #e8f5e9;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border: 3px solid #4caf50;
+            text-align: center;
+        }
+        
+        .guarantee-box h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 25px 60px;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 20px rgba(255,107,107,0.4);
+        }
+        
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.5);
+        }
+        
+        .decline-link {
+            display: block;
+            margin-top: 30px;
+            color: #999;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        
+        .decline-link:hover {
+            color: #666;
+        }
+        
+        .urgency-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .urgency-box strong {
+            color: #ff6b6b;
+            font-size: 20px;
+        }
+        
+        .testimonial-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .value-stack {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .value-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .value-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 20px;
+            color: #667eea;
+        }
+        
+        .value-label {
+            flex: 1;
+        }
+        
+        .value-amount {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero h2 {
+                font-size: 20px;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-comparison .sale-price {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-bar">
+        ⏰ THIS OFFER EXPIRES IN: <div class="countdown-timer" id="countdown">15:00</div>
+        Once you leave this page, it's gone forever!
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="special-badge">⚡ SPECIAL ONE-TIME OFFER ⚡</div>
+            <h1>WAIT! You're 60% of the Way There...</h1>
+            <h2>But Here's What You're Missing to Scale to $50K-$100K/Month</h2>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <p style="font-size: 20px; text-align: center; margin-bottom: 30px;">
+                <strong>Congratulations on enrolling!</strong> You now have the foundational funnel system. But if you want to <strong>SCALE to $50K-$100K/month</strong> (instead of just getting started), you need the ADVANCED strategies...
+            </p>
+
+            <div class="urgency-box">
+                <strong>⚠️ IMPORTANT:</strong> This offer is only available RIGHT NOW on this page. Once you leave, it's gone forever. If you come back later, you'll pay the full price of <strong>$4,997</strong> (that's $3,000 more than today's price).
+            </div>
+
+            <h2>Here's Everything Included in "Advanced Funnel Mastery"</h2>
+
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h4>📊 MODULE 1: Advanced Traffic Strategies</h4>
+                    <div class="value">Value: $1,997</div>
+                    <ul>
+                        <li>The "Omnipresent Content System" - Be everywhere without burning out</li>
+                        <li>YouTube SEO Secrets - Rank videos in 48 hours</li>
+                        <li>Instagram Reels Formula - 100K+ views consistently</li>
+                        <li>Facebook Group Growth Hack - 10K members in 90 days</li>
+                        <li>Podcast Guest Playbook - 20+ podcasts booked</li>
+                    </ul>
+                </div>
+
+                <div class="module-card">
+                    <h4>🎯 MODULE 2: Conversion Optimization Mastery</h4>
+                    <div class="value">Value: $1,497</div>
+                    <ul>
+                        <li>47-Point Funnel Audit - Optimize every element</li>
+                        <li>A/B Testing Framework - Know what to test</li>
+                        <li>VSL Psychology Secrets - 40%+ conversion increase</li>
+                        <li>Objection-Crushing Scripts - Handle every objection</li>
+                        <li>The "Micro-Commitment Ladder" technique</li>
+                    </ul>
+                </div>
+
+                <div class="module-card">
+                    <h4>🚀 MODULE 3: Scaling Systems</h4>
+                    <div class="value">Value: $2,497</div>
+                    <ul>
+                        <li>The "10K to 100K Blueprint" - Step-by-step roadmap</li>
+                        <li>Team Building Playbook - Who, when, and how to hire</li>
+                        <li>Ad Scaling Strategies - $1K to $10K/day without killing ROAS</li>
+                        <li>Automation & Systems - 80% automation with AI</li>
+                        <li>Dashboard & Metrics - Track the 7 KPIs that matter</li>
+                    </ul>
+                </div>
+
+                <div class="module-card">
+                    <h4>💰 MODULE 4: High-Ticket Sales Mastery</h4>
+                    <div class="value">Value: $1,997</div>
+                    <ul>
+                        <li>Audit Call Framework 2.0 - 40%+ close rates</li>
+                        <li>Objection Handling Library - 37 proven responses</li>
+                        <li>Premium Positioning Tactics - Command $25K-$50K fees</li>
+                        <li>The "Assumptive Close" Method</li>
+                        <li>Follow-Up Sequences - Never lose a deal</li>
+                    </ul>
+                </div>
+
+                <div class="module-card">
+                    <h4>🎓 MODULE 5: Client Fulfillment & Retention</h4>
+                    <div class="value">Value: $997</div>
+                    <ul>
+                        <li>Onboarding Excellence - Create raving fans</li>
+                        <li>The "Wow Factor" System - Overdeliver efficiently</li>
+                        <li>Upsell & Cross-Sell Strategies - $10K to $50K clients</li>
+                        <li>Referral Generation Machine - 3-5 referrals per client</li>
+                        <li>Retention Systems - 12+ month client relationships</li>
+                    </ul>
+                </div>
+
+                <div class="module-card">
+                    <h4>🤖 MODULE 6: Advanced AI & Automation</h4>
+                    <div class="value">Value: $797</div>
+                    <ul>
+                        <li>ChatGPT Prompt Library - 50+ proven prompts</li>
+                        <li>AI Video Creation - VSLs without being on camera</li>
+                        <li>Automated Email Sequences - Set-and-forget</li>
+                        <li>Chatbot Integration - Qualify leads 24/7</li>
+                        <li>Voice AI for Follow-Ups - AI voice agents</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bonus-section">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 32px;">🎁 PLUS These 5 Exclusive Bonuses</h3>
+                
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #1: "Case Study Vault" - 25 Real Funnel Breakdowns</h4>
+                    <p>See inside 25 real 6-7 figure funnels across different industries. Steal what works for you.</p>
+                    <div class="bonus-value">Value: $1,497</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #2: "Swipe File Library" - 500+ Proven Templates</h4>
+                    <p>Landing pages, emails, VSL scripts, ad copy, sales scripts - all proven winners.</p>
+                    <div class="bonus-value">Value: $997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #3: "Weekly Group Coaching Calls" - 12 Months Access</h4>
+                    <p>Join live group coaching calls every week. Get your questions answered in real-time.</p>
+                    <div class="bonus-value">Value: $5,997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #4: "Private Mastermind Community" - Lifetime Access</h4>
+                    <p>Connect with other high-level funnel builders, share wins, get feedback, and collaborate.</p>
+                    <div class="bonus-value">Value: $2,997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #5: "Annual Funnel Audit" - Full Review by Our Team</h4>
+                    <p>Once per year, submit your funnel for a complete audit and optimization report.</p>
+                    <div class="bonus-value">Value: $2,500</div>
+                </div>
+            </div>
+
+            <div class="value-stack">
+                <h3 style="text-align: center; margin-bottom: 30px;">Your Complete Value Stack</h3>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 1: Advanced Traffic Strategies</div>
+                    <div class="value-amount">$1,997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 2: Conversion Optimization</div>
+                    <div class="value-amount">$1,497</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 3: Scaling Systems</div>
+                    <div class="value-amount">$2,497</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 4: High-Ticket Sales Mastery</div>
+                    <div class="value-amount">$1,997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 5: Client Fulfillment</div>
+                    <div class="value-amount">$997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">✅ MODULE 6: AI & Automation</div>
+                    <div class="value-amount">$797</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">🎁 BONUS #1: Case Study Vault</div>
+                    <div class="value-amount">$1,497</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">🎁 BONUS #2: Swipe File Library</div>
+                    <div class="value-amount">$997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">🎁 BONUS #3: Weekly Group Coaching</div>
+                    <div class="value-amount">$5,997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">🎁 BONUS #4: Mastermind Community</div>
+                    <div class="value-amount">$2,997</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">🎁 BONUS #5: Annual Funnel Audit</div>
+                    <div class="value-amount">$2,500</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-label">TOTAL VALUE:</div>
+                    <div class="value-amount">$24,770</div>
+                </div>
+            </div>
+
+            <div class="price-comparison">
+                <div class="regular-price">Regular Price: $4,997</div>
+                <div>TODAY'S PRICE:</div>
+                <div class="sale-price">$1,997</div>
+                <div class="savings">YOU SAVE: $22,773 (92% OFF!)</div>
+            </div>
+
+            <div class="guarantee-box">
+                <h3>🛡️ The "Scale or Free" Guarantee</h3>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    Implement the Advanced Mastery training for 90 days. If you don't see a measurable increase in your funnel conversion rates, lead quality, revenue per client, and overall monthly income, simply show us proof you implemented the training and we'll refund 100% of your $1,997. No questions asked.
+                </p>
+                <p style="font-size: 16px; margin-top: 20px; color: #666;">
+                    Why? Because this training WORKS. It's the same system used by my $120K private clients. You have nothing to lose and everything to gain.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">What Our Students Are Saying</h2>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "The Advanced Mastery training took me from $15K/month to $73K/month in just 2 months. The scaling systems module alone was worth 10X the investment. Best decision I ever made."
+                </div>
+                <div class="testimonial-author">— Sarah M., Business Coach</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I was stuck at a 12% close rate for months. After implementing the High-Ticket Sales Mastery module, I'm now closing at 38%. That's an extra $40K/month in revenue. Insane ROI."
+                </div>
+                <div class="testimonial-author">— Marcus T., Marketing Consultant</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "The AI & Automation module saved me 20 hours a week. I automated 80% of my funnel and my conversions actually INCREASED. I'm making more money while working less. This is the dream."
+                </div>
+                <div class="testimonial-author">— Jennifer K., Course Creator</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 42px; margin-bottom: 30px;">Ready to Scale to $50K-$100K/Month?</h2>
+            <p style="font-size: 22px; margin-bottom: 40px;">
+                Click the button below to add Advanced Mastery to your order for just $1,997 (60% OFF)
+            </p>
+            
+            <button class="cta-button" onclick="addToOrder()">
+                ✅ YES! ADD ADVANCED MASTERY TO MY ORDER
+            </button>
+            
+            <p style="margin-top: 20px; font-size: 16px;">
+                🔒 Secure Checkout | One-Time Payment | Instant Access
+            </p>
+            
+            <a href="no-thanks.html" class="decline-link">
+                No thanks, I'll skip this offer and pay $4,997 later
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Countdown Timer
+        let timeLeft = 15 * 60; // 15 minutes in seconds
+        
+        function updateCountdown() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('countdown').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                document.getElementById('countdown').textContent = 'EXPIRED';
+                document.querySelector('.cta-button').disabled = true;
+                document.querySelector('.cta-button').style.background = '#999';
+                document.querySelector('.cta-button').textContent = 'OFFER EXPIRED';
+            }
+        }
+        
+        updateCountdown();
+        
+        // Add to Order Function
+        function addToOrder() {
+            // In a real implementation, this would:
+            // 1. Add the product to cart
+            // 2. Process payment
+            // 3. Redirect to next OTO or thank you page
+            alert('Processing your order... Redirecting to checkout.');
+            // window.location.href = 'checkout.html?product=oto1';
+        }
+        
+        // Exit Intent Popup
+        let exitIntentShown = false;
+        
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 0 && !exitIntentShown) {
+                exitIntentShown = true;
+                if (confirm('WAIT! Are you sure you want to pay $3,000 more later?\n\nThis offer is only $1,997 RIGHT NOW.\n\nClick OK to stay and claim your discount.')) {
+                    // User clicked OK, stay on page
+                } else {
+                    // User clicked Cancel, let them leave
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Done-For-You Traffic - Fill Your Funnel With 500+ Qualified Leads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .urgency-bar {
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+        
+        .countdown {
+            font-size: 28px;
+            margin-top: 8px;
+            letter-spacing: 2px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 54px;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero h2 {
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .hero .traffic-badge {
+            display: inline-block;
+            background: white;
+            color: #e74c3c;
+            padding: 15px 45px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .content-section {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .content-section h2 {
+            font-size: 42px;
+            margin-bottom: 35px;
+            text-align: center;
+            color: #e74c3c;
+        }
+        
+        .content-section h3 {
+            font-size: 32px;
+            margin: 40px 0 25px;
+            color: #2c3e50;
+        }
+        
+        .content-section p {
+            font-size: 19px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .problem-statement {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 35px;
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+        
+        .problem-statement h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .problem-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .problem-list li {
+            padding: 12px 0;
+            font-size: 19px;
+            padding-left: 35px;
+            position: relative;
+        }
+        
+        .problem-list li:before {
+            content: "❌";
+            position: absolute;
+            left: 0;
+            font-size: 22px;
+        }
+        
+        .solution-statement {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(39,174,96,0.3);
+        }
+        
+        .solution-statement h3 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .channel-card {
+            background: #f8f9fa;
+            padding: 35px;
+            border-radius: 12px;
+            border-top: 6px solid #e74c3c;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .channel-card h4 {
+            font-size: 26px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .channel-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .channel-card ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 17px;
+        }
+        
+        .channel-card ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .timeline-section {
+            background: #ecf0f1;
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin: 50px 0;
+        }
+        
+        .timeline-section h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        
+        .week-box {
+            background: white;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+            border-left: 6px solid #3498db;
+        }
+        
+        .week-box h4 {
+            color: #3498db;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .week-box ul {
+            list-style: none;
+        }
+        
+        .week-box ul li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        
+        .week-box ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .results-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .results-box h3 {
+            color: white;
+            font-size: 38px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+        
+        .roi-calculation {
+            background: #fff9e6;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            border: 3px dashed #ffd700;
+        }
+        
+        .roi-calculation h3 {
+            color: #856404;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .roi-math {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        
+        .roi-result {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            color: #27ae60;
+            margin: 30px 0;
+        }
+        
+        .bonus-section {
+            background: #f0f8ff;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 3px solid #3498db;
+        }
+        
+        .bonus-section h3 {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 36px;
+            color: #2c3e50;
+        }
+        
+        .bonus-item {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .bonus-item h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+        
+        .bonus-value {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .price-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 70px 40px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .price-section .regular-price {
+            font-size: 32px;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+        
+        .price-section .sale-price {
+            font-size: 90px;
+            font-weight: bold;
+            margin: 25px 0;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.4);
+        }
+        
+        .price-section .savings {
+            font-size: 32px;
+            background: #e74c3c;
+            padding: 18px 45px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+        
+        .guarantee-section {
+            background: #e8f5e9;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 4px solid #4caf50;
+            text-align: center;
+        }
+        
+        .guarantee-section h3 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-size: 38px;
+        }
+        
+        .guarantee-number {
+            font-size: 64px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 25px 0;
+        }
+        
+        .testimonial-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 35px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-size: 19px;
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 18px;
+        }
+        
+        .testimonial-result {
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 19px;
+        }
+        
+        .cta-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 30px 70px;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 12px;
+            margin: 30px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 30px rgba(231,76,60,0.5);
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(231,76,60,0.6);
+        }
+        
+        .decline-link {
+            display: block;
+            margin-top: 40px;
+            color: #999;
+            font-size: 15px;
+            text-decoration: underline;
+        }
+        
+        .decline-link:hover {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero h2 {
+                font-size: 22px;
+            }
+            
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-section .sale-price {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="urgency-bar">
+        ⚡ THIS OFFER EXPIRES IN: <div class="countdown" id="timer">10:00</div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="traffic-badge">🚀 DONE-FOR-YOU TRAFFIC</div>
+            <h1>You Have the Funnel.<br>Now Let Us Fill It With Qualified Leads.</h1>
+            <h2>We'll drive 500-1,000 qualified prospects to your funnel in the next 30 days using our proven multi-channel traffic system. You focus on closing sales. We handle the lead generation.</h2>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <p style="font-size: 22px; text-align: center; margin-bottom: 40px;">
+                You've done the hard work. You built your funnel. You created your offer. You're ready to close sales.
+            </p>
+
+            <div class="problem-statement">
+                <h3>But Here's the Problem...</h3>
+                <p style="font-size: 20px;"><strong>Nobody's seeing it.</strong></p>
+                <ul class="problem-list">
+                    <li>Your calendar is empty</li>
+                    <li>Your email list isn't growing</li>
+                    <li>Your funnel is sitting there... collecting dust</li>
+                </ul>
+                <p style="font-size: 20px; margin-top: 20px;">The problem isn't your funnel. It's <strong>TRAFFIC</strong>.</p>
+            </div>
+
+            <p style="font-size: 20px; text-align: center; margin: 40px 0;">
+                And let me guess - you don't want to:
+            </p>
+            <ul class="problem-list" style="max-width: 600px; margin: 0 auto;">
+                <li>Spend months learning Facebook ads</li>
+                <li>Post on social media 3x per day for the next year</li>
+                <li>Waste thousands on ads that don't convert</li>
+            </ul>
+
+            <div class="solution-statement">
+                <h3>That's Why I Created the "30-Day Traffic Blitz"</h3>
+                <p style="font-size: 21px; line-height: 1.8;">
+                    We drive 500-1,000 qualified prospects TO your funnel while you focus on what you do best: closing sales and serving clients.
+                </p>
+            </div>
+
+            <h2>How It Works: Our 4-Channel Traffic System</h2>
+
+            <div class="channels-grid">
+                <div class="channel-card">
+                    <h4>🎯 CHANNEL #1: Organic Social Media</h4>
+                    <ul>
+                        <li>30 posts created and scheduled (images + captions)</li>
+                        <li>5 Instagram Reels scripts provided</li>
+                        <li>Daily engagement strategy</li>
+                        <li>Hashtag & SEO optimization</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #666;">We create and post content on Instagram/Facebook that drives traffic to your funnel.</p>
+                </div>
+
+                <div class="channel-card">
+                    <h4>📹 CHANNEL #2: YouTube SEO Content</h4>
+                    <ul>
+                        <li>2 long-form video scripts created</li>
+                        <li>SEO keyword research for max traffic</li>
+                        <li>Thumbnail design and optimization</li>
+                        <li>Title, description, tags optimized</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #666;">We script, optimize, and publish YouTube videos that rank and drive organic traffic.</p>
+                </div>
+
+                <div class="channel-card">
+                    <h4>💰 CHANNEL #3: Paid Facebook/Instagram Ads</h4>
+                    <ul>
+                        <li>3 ad campaigns created (testing angles)</li>
+                        <li>Audience targeting & lookalikes</li>
+                        <li>Daily ad monitoring and optimization</li>
+                        <li>Budget allocation strategy</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #666;">We create and manage ad campaigns (your $500-$1K ad spend, our expertise).</p>
+                </div>
+
+                <div class="channel-card">
+                    <h4>🤝 CHANNEL #4: Direct Outreach (BONUS)</h4>
+                    <ul>
+                        <li>Partner/influencer outreach strategy</li>
+                        <li>10 partnership opportunities identified</li>
+                        <li>Email templates for outreach</li>
+                        <li>Collaboration ideas for promotion</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #666;">We identify partners and give you templates to collaborate and cross-promote.</p>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <h3>Your 30-Day Traffic Roadmap</h3>
+                
+                <div class="week-box">
+                    <h4>✅ WEEK 1: Setup & Strategy</h4>
+                    <ul>
+                        <li>Traffic Strategy Session (60 minutes)</li>
+                        <li>Audience Targeting Research</li>
+                        <li>Content Calendar Creation (30 days mapped)</li>
+                        <li>Ad Account Setup & Pixel Installation</li>
+                    </ul>
+                </div>
+
+                <div class="week-box">
+                    <h4>✅ WEEK 2: Content Creation</h4>
+                    <ul>
+                        <li>30 Social Media Posts (Created + Scheduled)</li>
+                        <li>5 Instagram Reels Scripts</li>
+                        <li>2 YouTube Video Scripts + SEO Optimization</li>
+                        <li>3 Facebook/Instagram Ads (Copy + Creative)</li>
+                    </ul>
+                </div>
+
+                <div class="week-box">
+                    <h4>✅ WEEK 3: Traffic Activation</h4>
+                    <ul>
+                        <li>Daily Social Media Posting</li>
+                        <li>YouTube Video Publishing</li>
+                        <li>Paid Ad Campaign Launch</li>
+                        <li>Daily Monitoring & Adjustments</li>
+                    </ul>
+                </div>
+
+                <div class="week-box">
+                    <h4>✅ WEEK 4: Optimization & Scale</h4>
+                    <ul>
+                        <li>Performance Analysis Report</li>
+                        <li>A/B Testing & Optimization</li>
+                        <li>Scale Recommendations</li>
+                        <li>Final Strategy Call + Ongoing Plan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="results-box">
+                <h3>Expected Results in 30 Days</h3>
+                <p style="font-size: 20px; margin-bottom: 30px;">Based on our experience running traffic campaigns for 1,300+ funnels:</p>
+                
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">500-1,000</div>
+                        <div class="stat-label">Qualified Prospects<br>to Your Funnel</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100-300</div>
+                        <div class="stat-label">Email Opt-Ins<br>(Building Your List)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">20-50</div>
+                        <div class="stat-label">Booked Sales Calls<br>(Ready to Close)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roi-calculation">
+                <h3>The ROI Potential</h3>
+                <div class="roi-math">
+                    If your offer is $5K-$10K<br>
+                    and you close just 5-10 clients...
+                </div>
+                <div class="roi-result">$25K-$100K in Revenue</div>
+                <div class="roi-math">
+                    From a $2,997 investment
+                </div>
+                <p style="text-align: center; font-size: 24px; margin-top: 30px; font-weight: bold; color: #27ae60;">
+                    That's a 10-30X ROI Potential
+                </p>
+            </div>
+
+            <div class="bonus-section">
+                <h3>🎁 PLUS These 5 Bonuses</h3>
+                
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #1: "Viral Reels Formula" Training</h4>
+                    <p>Learn the exact formula for creating Reels that get 50K-500K+ views consistently.</p>
+                    <div class="bonus-value">Value: $497</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #2: "Ad Creative Swipe File"</h4>
+                    <p>Access 100+ high-performing ad examples from different industries.</p>
+                    <div class="bonus-value">Value: $297</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #3: "Post-30-Day Traffic Plan"</h4>
+                    <p>After 30 days, we give you a complete roadmap for sustaining traffic on your own.</p>
+                    <div class="bonus-value">Value: $997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #4: "Lead Magnet Library"</h4>
+                    <p>50+ lead magnet ideas and templates to grow your email list faster.</p>
+                    <div class="bonus-value">Value: $397</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #5: "Organic Growth Playbook"</h4>
+                    <p>Step-by-step guide to growing your social media following without paid ads.</p>
+                    <div class="bonus-value">Value: $697</div>
+                </div>
+            </div>
+
+            <div class="price-section">
+                <div>TOTAL VALUE: $15,000+</div>
+                <div class="regular-price">Regular Price: $9,997</div>
+                <div>TODAY'S PRICE:</div>
+                <div class="sale-price">$2,997</div>
+                <div class="savings">YOU SAVE: $12,000+ (80% OFF!)</div>
+            </div>
+
+            <div class="guarantee-section">
+                <h3>🛡️ The "500 Prospects or We Work For Free" Guarantee</h3>
+                <p style="font-size: 20px; line-height: 1.8;">
+                    We'll drive at least <span class="guarantee-number">500</span> qualified prospects to your funnel in 30 days.
+                </p>
+                <p style="font-size: 20px; line-height: 1.8; margin-top: 20px;">
+                    If we don't hit this number, we'll continue working for FREE until we do (up to an additional 30 days).
+                </p>
+                <p style="font-size: 18px; margin-top: 25px; color: #2e7d32; font-weight: bold;">
+                    You'll get additional content creation, extended ad management, and continued optimization at no extra cost. We don't get paid unless you get results.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 42px;">Real Results From the Traffic Blitz</h2>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "They drove 847 qualified leads to my funnel in 28 days. I booked 63 calls and closed 14 clients. $87K in revenue from a $3K investment. Best ROI ever."
+                </div>
+                <div class="testimonial-author">— Marcus T., Business Coach</div>
+                <div class="testimonial-result">Result: $87,000 from 847 leads</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I was stuck at 10-15 leads per month. After the Traffic Blitz, I got 274 leads in 30 days. My calendar was fully booked for 8 weeks straight. Game-changer."
+                </div>
+                <div class="testimonial-author">— Amanda R., Marketing Consultant</div>
+                <div class="testimonial-result">Result: 274 leads in 30 days</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I didn't have time to post on social or run ads. They did it all for me. I just showed up to close the sales. Made $53K in my first 45 days. Worth every penny."
+                </div>
+                <div class="testimonial-author">— Kevin L., Course Creator</div>
+                <div class="testimonial-result">Result: $53,000 in 45 days</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Fill Your Funnel With 500+ Qualified Leads?</h2>
+            <p style="font-size: 24px; margin-bottom: 40px;">
+                Click below to start the 30-Day Traffic Blitz and let us drive qualified prospects to your funnel starting THIS WEEK
+            </p>
+            
+            <button class="cta-button" onclick="startTrafficBlitz()">
+                ✅ YES! FILL MY FUNNEL WITH 500+ QUALIFIED LEADS
+            </button>
+            
+            <p style="margin-top: 25px; font-size: 16px; opacity: 0.8;">
+                🔒 Secure Checkout | One-Time Payment | We Start This Week
+            </p>
+            
+            <a href="thank-you.html" class="decline-link">
+                No thanks, I'll try to figure out traffic on my own
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Countdown Timer (10 minutes)
+        let timeLeft = 10 * 60;
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                document.getElementById('timer').textContent = 'EXPIRED';
+            }
+        }
+        
+        updateTimer();
+        
+        function startTrafficBlitz() {
+            alert('Processing your order... Redirecting to checkout.');
+            // window.location.href = 'checkout.html?product=oto3';
+        }
+        
+        // Exit Intent
+        let exitShown = false;
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 0 && !exitShown) {
+                exitShown = true;
+                if (confirm('WAIT! Don\'t let your funnel sit empty...\n\nWe can fill it with 500+ qualified leads in 30 days for just $2,997.\n\nClick OK to claim this offer before it expires.')) {
+                    // User stays
+                }
+            }
+        });
+    </script>
+</body>
+</html>

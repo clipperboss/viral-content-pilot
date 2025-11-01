@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Directly With Me - 90-Day Implementation Fast Track</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .spots-bar {
+            background: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .spots-number {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h2 {
+            font-size: 30px;
+            font-weight: normal;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+        
+        .hero .premium-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            50% { box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+        
+        .content-section {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .content-section h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .content-section h3 {
+            font-size: 30px;
+            margin: 40px 0 20px;
+            color: #34495e;
+        }
+        
+        .content-section p {
+            font-size: 19px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .problem-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .problem-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .problem-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .problem-list li {
+            padding: 10px 0;
+            font-size: 18px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .problem-list li:before {
+            content: "😰";
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+        
+        .solution-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .solution-box h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .checkmark-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .checkmark-list li {
+            padding: 10px 0;
+            font-size: 18px;
+            padding-left: 35px;
+            position: relative;
+        }
+        
+        .checkmark-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+        
+        .timeline {
+            margin: 40px 0;
+        }
+        
+        .phase {
+            background: #f8f9fa;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 10px;
+            border-left: 8px solid #3498db;
+        }
+        
+        .phase h3 {
+            color: #3498db;
+            margin-top: 0;
+            font-size: 32px;
+        }
+        
+        .phase h4 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 22px;
+        }
+        
+        .phase ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .phase ul li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 17px;
+        }
+        
+        .phase ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .support-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .support-section h3 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .support-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .support-item h4 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .bonus-section {
+            background: #fff9e6;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border: 3px dashed #ffd700;
+        }
+        
+        .bonus-section h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #333;
+        }
+        
+        .bonus-item {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #ffd700;
+        }
+        
+        .bonus-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .bonus-value {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .price-box {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .price-box .regular-price {
+            font-size: 28px;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        
+        .price-box .sale-price {
+            font-size: 80px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .price-box .payment-plan {
+            font-size: 24px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .price-box .savings {
+            font-size: 30px;
+            background: #ffd700;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+        
+        .guarantee-box {
+            background: #e8f5e9;
+            padding: 50px 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border: 4px solid #4caf50;
+            text-align: center;
+        }
+        
+        .guarantee-box h3 {
+            color: #2e7d32;
+            margin-bottom: 25px;
+            font-size: 36px;
+        }
+        
+        .guarantee-box .guarantee-amount {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+        
+        .testimonial-section {
+            background: #f8f9fa;
+            padding: 60px 20px;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 35px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-size: 19px;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 18px;
+        }
+        
+        .testimonial-result {
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        
+        .cta-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 30px 70px;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 12px;
+            margin: 25px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+        }
+        
+        .cta-button:hover {
+            background: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,215,0,0.6);
+        }
+        
+        .payment-options {
+            margin: 30px 0;
+            font-size: 18px;
+        }
+        
+        .decline-link {
+            display: block;
+            margin-top: 40px;
+            color: #999;
+            font-size: 15px;
+            text-decoration: underline;
+        }
+        
+        .decline-link:hover {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero h2 {
+                font-size: 22px;
+            }
+            
+            .price-box .sale-price {
+                font-size: 56px;
+            }
+            
+            .cta-button {
+                font-size: 24px;
+                padding: 25px 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="spots-bar">
+        🔥 ONLY <span class="spots-number">3</span> SPOTS LEFT THIS MONTH 🔥
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="premium-badge">⭐ PREMIUM DONE-WITH-YOU PROGRAM ⭐</div>
+            <h1>You Have the Blueprint.<br>Now Let Me PERSONALLY Help You Build It.</h1>
+            <h2>Work directly with me and my team for 90 days. We'll build your funnel TOGETHER, optimize every element, and get you to your first $50K-$100K in revenue.</h2>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <p style="font-size: 22px; text-align: center; margin-bottom: 40px; line-height: 1.6;">
+                <strong>Congratulations</strong> - you now have everything you need to build a 6-7 figure funnel. But here's what I've learned after working with 25,000+ entrepreneurs:
+            </p>
+
+            <div class="problem-box">
+                <h3>Having the Blueprint is NOT the Same as Implementing It</h3>
+                <p>Most people get stuck at one of these stages:</p>
+                <ul class="problem-list">
+                    <li>"I don't know where to start"</li>
+                    <li>"I'm overwhelmed by all the tech"</li>
+                    <li>"I'm not sure if my copy is good enough"</li>
+                    <li>"What if I launch and nobody buys?"</li>
+                    <li>"I don't have time to figure this all out"</li>
+                </ul>
+                <p style="font-size: 20px; margin-top: 20px;"><strong>Sound familiar?</strong></p>
+            </div>
+
+            <div class="solution-box">
+                <h3>That's Why I Created the 90-Day Implementation Fast Track</h3>
+                <p>It's a <strong>DONE-WITH-YOU</strong> program where my team and I work alongside you to:</p>
+                <ul class="checkmark-list">
+                    <li>Build your complete funnel (landing page, VSL, email sequence)</li>
+                    <li>Launch it properly (no tech headaches or missed steps)</li>
+                    <li>Optimize it for maximum conversions (based on real data)</li>
+                    <li>Scale it to $50K-$100K/month (with proven traffic strategies)</li>
+                </ul>
+                <p style="font-size: 20px; margin-top: 20px; font-weight: bold;">All in just 90 days.</p>
+            </div>
+
+            <h2>Here's What Happens During Your 90 Days</h2>
+
+            <div class="timeline">
+                <div class="phase">
+                    <h3>📅 PHASE 1: FOUNDATION & SETUP (Days 1-30)</h3>
+                    
+                    <h4>Week 1: Intensive Strategy Session</h4>
+                    <ul>
+                        <li>2-Hour Private Funnel Strategy Session (with me or senior strategist)</li>
+                        <li>Complete Ideal Customer Profile Workshop</li>
+                        <li>High-Ticket Offer Architecture (Your $5K, $15K, $25K suite)</li>
+                        <li>Funnel Blueprint Creation</li>
+                        <li>30-Day Implementation Plan</li>
+                    </ul>
+
+                    <h4>Week 2: Copy & Messaging</h4>
+                    <ul>
+                        <li>Landing Page Copy Review & Optimization (We review YOUR draft)</li>
+                        <li>VSL Script Development Session (We help you write it together)</li>
+                        <li>Email Sequence Review & Polish (We optimize your 7-day nurture)</li>
+                        <li>Ad Copy Workshop (We craft your first 5 ads together)</li>
+                    </ul>
+
+                    <h4>Week 3: Design & Tech Setup</h4>
+                    <ul>
+                        <li>Landing Page Design Consultation</li>
+                        <li>Tech Stack Setup Guidance (ClickFunnels/GoHighLevel setup)</li>
+                        <li>Email Platform Integration Support</li>
+                        <li>CRM & Automation Setup Session</li>
+                    </ul>
+
+                    <h4>Week 4: Content Creation Support</h4>
+                    <ul>
+                        <li>VSL Recording Coaching Session</li>
+                        <li>Content Calendar Planning (Map out 90 days)</li>
+                        <li>Social Media Setup & Optimization</li>
+                        <li>First Draft Review & Feedback</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>🚀 PHASE 2: LAUNCH & OPTIMIZE (Days 31-60)</h3>
+                    
+                    <h4>Week 5: Pre-Launch Preparation</h4>
+                    <ul>
+                        <li>Complete Funnel Audit (We test every element)</li>
+                        <li>Launch Checklist Review</li>
+                        <li>Analytics & Tracking Setup (Facebook Pixel, Google Analytics)</li>
+                        <li>Team Training Session (if applicable)</li>
+                    </ul>
+
+                    <h4>Week 6: Launch Week</h4>
+                    <ul>
+                        <li>LIVE Launch Day Support (We're with you on Slack all day)</li>
+                        <li>First 100 Leads Analysis</li>
+                        <li>Real-Time Troubleshooting</li>
+                        <li>Quick Win Optimization</li>
+                    </ul>
+
+                    <h4>Week 7-8: Optimization Sprints</h4>
+                    <ul>
+                        <li>Bi-Weekly Optimization Calls (60 minutes each)</li>
+                        <li>A/B Testing Guidance</li>
+                        <li>Conversion Rate Analysis</li>
+                        <li>Copy & Design Tweaks (based on data)</li>
+                    </ul>
+                </div>
+
+                <div class="phase">
+                    <h3>📈 PHASE 3: SCALE & SYSTEMIZE (Days 61-90)</h3>
+                    
+                    <h4>Week 9-10: Scaling Strategies</h4>
+                    <ul>
+                        <li>Traffic Scaling Session (Organic + Paid ads)</li>
+                        <li>Ad Campaign Review & Feedback</li>
+                        <li>Budget Allocation Workshop</li>
+                        <li>ROAS Tracking & Analysis</li>
+                    </ul>
+
+                    <h4>Week 11-12: Systems & Team</h4>
+                    <ul>
+                        <li>SOP Creation Workshop (Document your systems)</li>
+                        <li>Team Hiring Guidance</li>
+                        <li>Client Fulfillment Systems</li>
+                        <li>90-Day Results Review (Celebrate wins!)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="support-section">
+                <h3>Ongoing Support Throughout All 90 Days</h3>
+                <div class="support-item">
+                    <h4>✅ Weekly 60-Minute Group Coaching Calls</h4>
+                    <p>Join live calls every week with other Fast Track members. Hot seat coaching, Q&A, and implementation support.</p>
+                </div>
+                <div class="support-item">
+                    <h4>✅ Private Slack Community Access</h4>
+                    <p>Direct access to me and my team. Get questions answered within 24 hours (often within 2-4 hours).</p>
+                </div>
+                <div class="support-item">
+                    <h4>✅ Unlimited Funnel Reviews</h4>
+                    <p>Submit your funnel, copy, ads, or VSL for review as many times as needed. We'll give detailed feedback every time.</p>
+                </div>
+                <div class="support-item">
+                    <h4>✅ Template & Swipe File Vault</h4>
+                    <p>Access our library of 500+ proven templates, scripts, and swipe files. Don't start from scratch.</p>
+                </div>
+                <div class="support-item">
+                    <h4>✅ Monthly 1-on-1 Strategy Calls</h4>
+                    <p>Three 60-minute private calls (one per month) with a senior strategist to keep you on track.</p>
+                </div>
+            </div>
+
+            <div class="bonus-section">
+                <h3>🎁 PLUS These 5 Exclusive Bonuses</h3>
+                
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #1: "First Client Guarantee Blueprint"</h4>
+                    <p>If you don't have clients yet, we'll help you get your FIRST high-ticket client within 30 days using our proven "Quick Win" method.</p>
+                    <div class="bonus-value">Value: $1,997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #2: "Sales Script Library"</h4>
+                    <p>Get access to my personal collection of sales scripts, objection handlers, and closing techniques.</p>
+                    <div class="bonus-value">Value: $997</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #3: "Emergency Optimization Session"</h4>
+                    <p>If something's not working, book an emergency 90-minute session with our team. We'll diagnose and fix it fast.</p>
+                    <div class="bonus-value">Value: $2,500</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #4: "Post-90-Day Transition Plan"</h4>
+                    <p>At the end of 90 days, we'll create your custom roadmap for the NEXT 90 days so you know exactly what to do next.</p>
+                    <div class="bonus-value">Value: $497</div>
+                </div>
+
+                <div class="bonus-item">
+                    <h4>🎁 BONUS #5: "Lifetime Alumni Community Access"</h4>
+                    <p>Even after your 90 days end, you'll have lifetime access to our private alumni community. Network, collaborate, and stay connected.</p>
+                    <div class="bonus-value">Value: $3,997</div>
+                </div>
+            </div>
+
+            <div class="price-box">
+                <div>TOTAL VALUE: $35,000+</div>
+                <div class="regular-price">Regular Price: $9,997</div>
+                <div>TODAY'S PRICE:</div>
+                <div class="sale-price">$4,997</div>
+                <div class="payment-plan">Or 3 Payments of $1,797</div>
+                <div class="savings">YOU SAVE: $30,000+ (75% OFF!)</div>
+            </div>
+
+            <div class="guarantee-box">
+                <h3>🛡️ The "$50K in 90 Days or We Work For Free" Guarantee</h3>
+                <p style="font-size: 20px; line-height: 1.8;">
+                    Follow our 90-day implementation plan. Show up to the calls. Do the work.
+                </p>
+                <div class="guarantee-amount">$50,000</div>
+                <p style="font-size: 20px; line-height: 1.8;">
+                    If you don't generate at least <strong>$50,000 in revenue</strong> within your 90 days (or within 120 days if you need extra time), we'll work with you for FREE until you do.
+                </p>
+                <p style="font-size: 18px; margin-top: 20px;">
+                    That means additional strategy calls, continued Slack support, and funnel optimization sessions - all at no extra cost.
+                </p>
+                <p style="font-size: 18px; margin-top: 20px; color: #2e7d32; font-weight: bold;">
+                    Why can I make this guarantee? Because I've done this 1,300+ times. I know what works. If you do the work, you WILL get results.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 42px;">What Fast Track Members Are Saying</h2>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I was drowning in overwhelm. The Fast Track gave me a clear roadmap, hands-on support, and accountability. I launched in 6 weeks and made $73K in my first 60 days. Worth every penny."
+                </div>
+                <div class="testimonial-author">— Sarah M., Business Coach</div>
+                <div class="testimonial-result">Result: $73,000 in first 60 days</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "Best investment I've ever made. Having Shakirin's team review my copy, guide my tech setup, and troubleshoot issues saved me MONTHS of frustration. Hit $50K in month 2."
+                </div>
+                <div class="testimonial-author">— David L., Marketing Consultant</div>
+                <div class="testimonial-result">Result: $50,000 in month 2</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I tried to build my funnel alone for 8 months. Got nowhere. Joined Fast Track and launched in 4 weeks. Now doing $40K/month consistently. Wish I had done this from the start."
+                </div>
+                <div class="testimonial-author">— Jennifer K., Course Creator</div>
+                <div class="testimonial-result">Result: $40,000/month consistently</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Build Your $50K-$100K/Month Funnel?</h2>
+            <p style="font-size: 24px; margin-bottom: 30px;">
+                Join the 90-Day Implementation Fast Track and let's build it TOGETHER
+            </p>
+            
+            <button class="cta-button" onclick="claimSpot()">
+                ✅ YES! I WANT 90 DAYS OF DONE-WITH-YOU SUPPORT
+            </button>
+            
+            <div class="payment-options">
+                💳 Pay in Full: $4,997 (Save $1,500)<br>
+                💳 Or 3 Payments: $1,797/month
+            </div>
+            
+            <p style="margin-top: 25px; font-size: 16px; opacity: 0.8;">
+                🔒 Secure Checkout | Payment Plan Available | We Start This Week
+            </p>
+            
+            <a href="no-thanks.html" class="decline-link">
+                No thanks, I'll try to figure it out alone
+            </a>
+        </div>
+    </section>
+
+    <script>
+        function claimSpot() {
+            // In a real implementation, this would redirect to payment page
+            if (confirm('Choose your payment option:\n\nOK = Pay in Full ($4,997)\nCancel = 3 Payments ($1,797/month)')) {
+                alert('Redirecting to checkout... Pay in Full option selected.');
+                // window.location.href = 'checkout.html?product=oto2-full';
+            } else {
+                alert('Redirecting to checkout... Payment Plan option selected.');
+                // window.location.href = 'checkout.html?product=oto2-plan';
+            }
+        }
+        
+        // Update spots counter (simulate decreasing spots)
+        let spots = 3;
+        setInterval(() => {
+            if (Math.random() > 0.7 && spots > 1) {
+                spots--;
+                document.querySelector('.spots-number').textContent = spots;
+            }
+        }, 45000); // Every 45 seconds, chance to decrease spot
+    </script>
+</body>
+</html>
